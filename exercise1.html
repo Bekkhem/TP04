@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>exercies 1</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        
+        .container {
+            margin: 1% auto;
+            width: 25%;
+            height: 80vh;
+            background-color: #f1f1f1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .container .counter_text {
+            position: relative;
+            width: 100%;
+            height: 30%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 3em;
+        }
+        
+        .container .counter_number {
+            margin: 0;
+            width: 100%;
+            height: 30%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2.5em;
+            color: blue;
+        }
+        
+        .container .counter_btn {
+            margin: 0;
+            width: 100%;
+            height: 40%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .container .counter_btn button {
+            margin: 0 10px;
+            padding: 5px 8px 5px;
+            border: 1px solid black;
+        }
+        
+        .container .counter_btn button:hover {
+            background-color: black;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="counter_text">
+            <span><b>Counter</b></span>
+        </div>
+        <div class="counter_number" id="value" value="0">0</div>
+        <div class="counter_btn">
+            <button type="submit" onclick="decrease()" class="btn-decrease">Decrease</button>
+            <button type="reset" onclick="reset()" class="btn-reset">Reset</button>
+            <button type="submit" onclick="increase()" class="btn-increase">Increase</button>
+        </div>
+    </div>
+    <script>
+        class counter {
+            number = 0;
+            constructor(num) {
+                this.number = num;
+                console.log(this.number)
+            }
+            decrease() {
+                this.number--;
+                return this.number;
+            }
+            increase() {
+                this.number++;
+                return this.number;
+            }
+
+            reset() {
+                this.number = 0;
+                return this.number;
+            }
+        }
+        let num = JSON.parse(localStorage.getItem('num'));
+        if (!num) {
+            num = 0;
+            var myCounter = new counter(num);
+        } else {
+            document.getElementsByClassName("counter_number")[0].innerHTML = ` <div class="counter_number" id="value" value="0">${num}</div>`;
+            var myCounter = new counter(num);
+            console.log(myCounter);
+            console.log(num);
+        }
+
+        function decrease() {
+            let res = myCounter.decrease();
+            setLocalstorage(res);
+            document.getElementsByClassName("counter_number")[0].innerHTML = `<div class="counter_number" id="value" value="0">${res}</div>`;
+        }
+
+        function increase() {
+            let res = myCounter.increase();
+            setLocalstorage(res);
+            document.getElementsByClassName("counter_number")[0].innerHTML = `<div class="counter_number" id="value" value="0">${res}</div>`;
+        }
+
+        function reset() {
+            let res = myCounter.reset();
+            setLocalstorage(res);
+            document.getElementsByClassName("counter_number")[0].innerHTML = `<div class="counter_number" id="value" value="0">${res}</div>`;
+        }
+        let setLocalstorage = (value) => {
+            localStorage.setItem('num', `${value}`);
+        }
+    </script>
+
+</body>
+
+</html>
